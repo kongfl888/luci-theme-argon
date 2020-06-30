@@ -6,9 +6,8 @@ on:
       - luci-20.029
     paths:
       - '.github/workflows/main.yml'
-      - 'luasrc/model/cbi/*'
-      - 'luasrc/controller/*'
-      - 'po/zh-cn/*'
+      - 'luasrc/**'
+      - 'htdocs/**'
       - 'root/**'
       - 'Makefile'
       - 'base_r2s.seed'
