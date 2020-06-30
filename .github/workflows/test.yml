@@ -1,4 +1,4 @@
-name: Build
+name: build
 
 on:
   push:
@@ -56,15 +56,13 @@ jobs:
           cd friendlywrt-rk3328
           sed -i '/=m/d;/CONFIG_IB/d;/CONFIG_SDK/d;/CONFIG_BUILDBOT/d;/CONFIG_ALL_KMODS/d;/CONFIG_ALL_NONSHARED/d;/docker/d;/DOCKER/d;/CONFIG_DISPLAY_SUPPORT/d;/CONFIG_AUDIO_SUPPORT/d;/CONFIG_OPENSSL_PREFER_CHACHA_OVER_GCM/d;/CONFIG_VERSION/d;/SAMBA/d;/samba/d;/modemmanager/d;' configs/config_rk3328
           sed -i '/luci-app-/d' configs/config_rk3328
-          sed -i '/kmod-/d' configs/config_rk3328
-          sed -i '/i18n-/d' configs/config_rk3328
           cat configs/config_rk3328 | grep "TARGET" >> ../base_r2s.seed
           cat ../base_r2s.seed > configs/config_rk3328
           cd friendlywrt
           git config --local user.email "action@github.com" && git config --local user.name "GitHub Action"
           git remote add upstream https://github.com/coolsnowwolf/lede && git fetch upstream
           git rebase adc1a9a3676b8d7be1b48b5aed185a94d8e42728^ --onto upstream/master -X theirs
-          rm -rf target/linux/rockchip-rk3328/patches-4.14/
+          rm target/linux/rockchip-rk3328/patches-4.14/0001-net-thunderx-workaround-BGX-TX-Underflow-issue.patch
           git checkout upstream/master -- feeds.conf.default
           sed -i '5s/#src-git/src-git/g' feeds.conf.default
 
@@ -75,7 +73,7 @@ jobs:
 
       - name: Add luci-theme-argon
         run: |
-          rm -rf friendlywrt-rk3328/friendlywrt/package/lean/luci-theme-argon || echo ""
+          rm -rf friendlywrt-rk3328/friendlywrt/package/lean/luci-theme-argon
           git clone -b luci-20.029 --single-branch https://github.com/kongfl888/luci-theme-argon.git
           mv luci-theme-argon friendlywrt-rk3328/friendlywrt/package
 
