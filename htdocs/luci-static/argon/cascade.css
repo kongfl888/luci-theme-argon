@@ -121,6 +121,9 @@
   content: "\e971";
 }
 .icon-question:before {
+  content: "\e911";
+}
+.icon-docker:before {
   content: "\f059";
 }
 .sk-folding-cube {
@@ -760,6 +763,10 @@ header .fill .status * {
 .main .main-left .nav li.slide .menu[data-title=Bandwidth_Monitor]:before {
   content: "\e90d";
   color: #2dce89;
+}
+.main .main-left .nav li.slide .menu[data-title=Docker]:before {
+  content: "\e911";
+  color: #6699ff;
 }
 .main .main-left .nav li.slide:hover {
   background: none;
