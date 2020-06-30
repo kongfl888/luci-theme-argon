@@ -121,10 +121,10 @@
   content: "\e971";
 }
 .icon-question:before {
-  content: "\e911";
+  content: "\f059";
 }
 .icon-docker:before {
-  content: "\f059";
+  content: "\e911";
 }
 .sk-folding-cube {
   position: absolute;
@@ -779,6 +779,10 @@ header .fill .status * {
 .main .main-left .nav li.slide .menu[data-title=Docker]:before {
   content: "\e911";
   color: #6699ff;
+}
+.main .main-left .nav li.slide .menu[data-title=Statistics]:before {
+  content: "\e90d";
+  color: #6F6F6F;
 }
 .main .main-left .nav li.slide:hover {
   background: none;
