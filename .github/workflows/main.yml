@@ -33,6 +33,8 @@ jobs:
           PKGNAME="luci-theme-argon"
           PKGNAME_SHORT="argon"
           echo "##[set-output name=pkg_name;]$PKGNAME"
+          mkdir -p /tmp/$PKGNAME/
+          rm -rf /tmp/$PKGNAME/*
           mkdir -p /tmp/$PKGNAME/usr/lib/lua/luci /tmp/$PKGNAME/www/
           [ -d $GITHUB_WORKSPACE/luasrc ] && cp -R $GITHUB_WORKSPACE/luasrc/* /tmp/$PKGNAME/usr/lib/lua/luci/
           [ -d $GITHUB_WORKSPACE/root ] && cp -R $GITHUB_WORKSPACE/root/* /tmp/$PKGNAME/
@@ -80,7 +82,7 @@ jobs:
           chmod +x /tmp/$PKGNAME/CONTROL/postinst
           chmod +x /tmp/$PKGNAME/CONTROL/postinst-pkg
           chmod +x /tmp/$PKGNAME/CONTROL/prerm
-          wget -O /tmp/ipkg-build https://raw.githubusercontent.com/openwrt/openwrt/master/scripts/ipkg-build && \
+          wget -O /tmp/ipkg-build https://raw.githubusercontent.com/openwrt/openwrt/v19.07.1/scripts/ipkg-build && \
           chmod +x /tmp/ipkg-build && \
           /tmp/ipkg-build -o root -g root /tmp/$PKGNAME /tmp
       - name: Assemble Artifact
