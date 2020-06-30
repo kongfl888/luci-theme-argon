@@ -66,29 +66,18 @@ jobs:
           git checkout upstream/master -- feeds.conf.default
           sed -i '5s/#src-git/src-git/g' feeds.conf.default
 
-      - name: Clean Feeds
-        run: |
-          cd friendlywrt-rk3328/friendlywrt
-          ./scripts/feeds clean -a
-
       - name: Add luci-theme-argon
         run: |
+          rm -rf friendlywrt-rk3328/friendlywrt/package/lean
           rm -rf friendlywrt-rk3328/friendlywrt/package/lean/luci-theme-argon
           git clone -b luci-20.029 --single-branch https://github.com/kongfl888/luci-theme-argon.git
-          mv luci-theme-argon friendlywrt-rk3328/friendlywrt/package
-
-      - name: Update Feeds
-        run: |
-          cd friendlywrt-rk3328/friendlywrt
-          ./scripts/feeds update -a
-          ./scripts/feeds install -a
-
+          mv -f luci-theme-argon friendlywrt-rk3328/friendlywrt/package/lean
       - name: Build
         run: |
           cd friendlywrt-rk3328
           sed -i 's/set -eu/set -u/' scripts/mk-friendlywrt.sh
           wget https://raw.githubusercontent.com/kongfl888/friendlywrt_device_rk3328/master/rk3328/nanopi_r2s.mk -O .current_config.mk
-          ./build.sh friendlywrt
+          ./build.sh friendlywrt || echo ""
 
       - name: Assemble Artifact
         id: assemble_artifact
