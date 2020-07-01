@@ -22,9 +22,9 @@ jobs:
     steps:
 
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
         with:
-          ref: master
+          ref: luci-20.029
 
       - name: build
         id: build_ipk
