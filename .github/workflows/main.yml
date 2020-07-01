@@ -32,23 +32,20 @@ jobs:
           PKGNAME="luci-theme-argon"
           PKGNAME_SHORT="argon"
           echo "##[set-output name=pkg_name;]$PKGNAME"
-          
-          git clone -b luci-20.029 --single-branch https://github.com/kongfl888/luci-theme-argon.git
-          
           mkdir -p /tmp/$PKGNAME/
           rm -rf /tmp/$PKGNAME/*
           mkdir -p /tmp/$PKGNAME/usr/lib/lua/luci /tmp/$PKGNAME/www/
-          [ -d $GITHUB_WORKSPACE/$PKGNAME/luasrc ] && cp -R $GITHUB_WORKSPACE/$PKGNAME/luasrc/* /tmp/$PKGNAME/usr/lib/lua/luci/
-          [ -d $GITHUB_WORKSPACE/$PKGNAME/root ] && cp -R $GITHUB_WORKSPACE/$PKGNAME/root/* /tmp/$PKGNAME/
-          [ -d $GITHUB_WORKSPACE/$PKGNAME/htdocs ] && cp -R $GITHUB_WORKSPACE/$PKGNAME/htdocs/* /tmp/$PKGNAME/www/
-          [ -d $GITHUB_WORKSPACE/$PKGNAME/po ] && sudo -E apt-get -y install gcc make && \
+          [ -d $GITHUB_WORKSPACE/luasrc ] && cp -R $GITHUB_WORKSPACE/luasrc/* /tmp/$PKGNAME/usr/lib/lua/luci/
+          [ -d $GITHUB_WORKSPACE/root ] && cp -R $GITHUB_WORKSPACE/root/* /tmp/$PKGNAME/
+          [ -d $GITHUB_WORKSPACE/htdocs ] && cp -R $GITHUB_WORKSPACE/htdocs/* /tmp/$PKGNAME/www/
+          [ -d $GITHUB_WORKSPACE/po ] && sudo -E apt-get -y install gcc make && \
           mkdir -p /tmp/po2lmo && mkdir -p /tmp/$PKGNAME/usr/lib/lua/luci/i18n/ && \
           wget -O /tmp/po2lmo/po2lmo.c https://raw.githubusercontent.com/openwrt/luci/openwrt-18.06/modules/luci-base/src/po2lmo.c && \
           wget -O /tmp/po2lmo/Makefile https://raw.githubusercontent.com/openwrt/luci/openwrt-18.06/modules/luci-base/src/Makefile && \
           wget -O /tmp/po2lmo/template_lmo.h https://raw.githubusercontent.com/openwrt/luci/openwrt-18.06/modules/luci-base/src/template_lmo.h && \
           wget -O /tmp/po2lmo/template_lmo.c https://raw.githubusercontent.com/openwrt/luci/openwrt-18.06/modules/luci-base/src/template_lmo.c && \
           cd /tmp/po2lmo && make po2lmo && \
-          ./po2lmo $GITHUB_WORKSPACE/$PKGNAME/po/zh-cn/$PKGNAME_SHORT.po /tmp/$PKGNAME/usr/lib/lua/luci/i18n/$PKGNAME_SHORT.zh-cn.lmo
+          ./po2lmo $GITHUB_WORKSPACE/po/zh-cn/$PKGNAME_SHORT.po /tmp/$PKGNAME/usr/lib/lua/luci/i18n/$PKGNAME_SHORT.zh-cn.lmo
           mkdir -p /tmp/$PKGNAME/CONTROL
           cat >/tmp/$PKGNAME/CONTROL/control <<EOF
           Package: ${PKGNAME}
