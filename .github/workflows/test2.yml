@@ -5,7 +5,7 @@ on:
     branches:
       - luci-20.029
     paths:
-      - '.github/workflows/test.yml'
+      - '.github/workflows/test2.yml'
       - 'luasrc/model/cbi/*'
       - 'luasrc/controller/*'
       - 'po/zh-cn/*'
@@ -77,10 +77,20 @@ jobs:
 
       - name: Build
         run: |
+          cp -f ./rules.mk friendlywrt-rk3328/friendlywrt
           cd friendlywrt-rk3328
           sed -i 's/set -eu/set -u/' scripts/mk-friendlywrt.sh
           wget https://raw.githubusercontent.com/kongfl888/friendlywrt_device_rk3328/master/rk3328/nanopi_r2s.mk -O .current_config.mk
-          ./build.sh friendlywrt || echo ""
+          #./build.sh friendlywrt || echo ""
+          cp -f configs/config_rk3328  friendlywrt/.config
+          cd friendlywrt
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a
+          make defconfig || echo ""
+          make -j8 download V=s
+          USING_DATE=$(date +%Y%m%d)
+          echo "${USING_DATE}" > ./package/base-files/files/etc/rom-version
+          make package/lean/luci-theme-argon/compile V=99
 
       - name: Assemble Artifact
         id: assemble_artifact

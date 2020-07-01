@@ -10,7 +10,6 @@ on:
       - 'htdocs/**'
       - 'root/**'
       - 'Makefile'
-      - 'base_r2s.seed'
 
 jobs:
 
