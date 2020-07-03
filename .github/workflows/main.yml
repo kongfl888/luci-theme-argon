@@ -93,7 +93,7 @@ jobs:
           sha256sum *ipk* > sha256sum.txt
           cd ..
           zip -r artifact.zip ./artifact/
-          release_tag="${{ steps.build_ipk.outputs.pkg_name }}-$(date +%Y-%m-%d-%H-%M)"
+          release_tag="${{ steps.build_ipk.outputs.pkg_name }}-20.029-$(date +%Y-%m-%d-%H-%M)"
           echo "##[set-output name=release_tag;]$release_tag"
       - name: Create Release
         id: create_release
