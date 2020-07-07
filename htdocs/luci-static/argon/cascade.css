@@ -2129,7 +2129,6 @@ td > .ifacebadge,
   display: inline-block;
   margin: 0 0.2rem;
 }
-.cbi-value-field .cbi-input-checkbox,
 .cbi-value-field .cbi-input-radio {
   margin-top: 0.1rem;
 }
@@ -2756,7 +2755,7 @@ input[type="checkbox"] {
   padding: 0;
   cursor: pointer;
   transition: all 0.2s;
-  margin: 1rem 0 0 0;
+  margin: 1rem 0 -0.2rem 0;
 }
 input[type="checkbox"]:checked {
   border: 1px solid #5e72e4;
