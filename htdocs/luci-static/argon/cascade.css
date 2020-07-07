@@ -948,12 +948,19 @@ h5 {
 .cbi-modal .cbi-tabmenu {
   margin-left: 0;
 }
-.cbi-map-descr,
+.cbi-map-descr {
+  font-size: small;
+  line-height: 1.42857143;
+  padding: 0.5rem 3.5rem;
+  margin: 0 -2rem;
+  color: #fff;
+  background-color: #5e72e4;
+}
 .cbi-section-descr {
   font-size: small;
   line-height: 1.42857143;
   padding: 0.5rem 0;
-  color: #fff;
+  margin: 0 0.5rem;
 }
 #cbi-dhcp-host > .cbi-section-descr {
   font-size: small;
